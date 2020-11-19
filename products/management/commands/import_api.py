@@ -21,7 +21,7 @@ class Command(BaseCommand):
             'Début de l\'importation API OpenFoodFacts'))
 
         # Remove data products
-        call_command('delete_products')
+        call_command('delete_categories')
 
         # request all categories from API
         contents = self.request_api_categories()
@@ -77,7 +77,7 @@ class Command(BaseCommand):
             url=category['url'],
             visible=True
         )
-        new_category.save()
+        # new_category.save()
 
     def add_product(self, product, id_category):
         """add one product in database."""
@@ -117,10 +117,10 @@ class Command(BaseCommand):
                 sugars_100g=product['nutriments'].get('sugars_100g', -1),
                 salt_100g=product['nutriments'].get('salt_100g', -1)
             )
-            if created:
-                category = Category.objects.get(pk=id_category)
-                new_product.categories.add(category)
-                new_product.save()
+
+            category = Category.objects.get(pk=id_category)
+            new_product.categories.add(category)
+            new_product.save()
 
     def check_all_fields_product(self, product, mandatory_fields):
         """checks if the mandatory fields are present in the dict product."""

@@ -10,7 +10,3 @@ class Command(BaseCommand):
         # Removes records from the category table
         self.stdout.write('Suppression des données Catégorie')
         Category.objects.all().delete()
-
-        # Removes records from the product table
-        self.stdout.write('Suppression des données Produit')
-        Product.objects.all().delete()
