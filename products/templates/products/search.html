@@ -1,0 +1,103 @@
+{% extends 'pages/_base.html' %}
+{% load static %}
+
+{% block title %}Pur Beurre - {{ product_select }} {% endblock title %}
+
+{% block content %}
+
+
+<section class="page-section bg-primary">
+    <div class="container">
+        {% if products %}
+
+
+        <div class="row pb-2">
+            <h4 class="text-white">Votre recherche a renvoyé <strong>{{ page_obj.paginator.count }}</strong>
+                produit{{ page_obj.paginator.count|pluralize }} correspondant à <strong>{{ search }} </strong></h4>
+        </div>
+        <div class="row">
+            {% for product in products %}
+
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <div class="item">
+                        <a href="{% url 'product_detail' product.slug %}">
+
+                            <img class="card-img-top rounded img-substitute mx-auto mw-100" alt="{{ product }}"
+                                src="{{ product.display_image }}" data-holder-rendered="true">
+                            <div class="badge badge-pill notify-badge">{{ product.nutriscore_grade }}</div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product }}</h5>
+                        <p class="card-text">{{ product.generic_name_fr }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{% url 'substitutes' product.slug %}" class="btn btn-sm btn-outline-secondary"
+                                id="link-{{ product.slug }}">Voir
+                                substituts</a>
+                            <small class="text-muted">{{ product.categories.first }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if is_paginated %}
+        <div class="row justify-content-center ">
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <!-- <span class="step-links"> -->
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link text-white bg-primary" href="?search={{search}}&page=1">&laquo; première</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-white bg-primary"
+                            href="?search={{search}}&page={{ page_obj.previous_page_number }}">précédent</a>
+                    </li>
+                    {% endif %}
+
+                    <li class="current page-item">
+                        <p class="text-white bg-primary p-2">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </p>
+                    </li>
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link text-white bg-primary"
+                            href="?search={{search}}&page={{ page_obj.next_page_number }}">suivant</a></li>
+                    <li class="page-item"><a class="page-link text-white bg-primary"
+                            href="?search={{search}}&page={{ page_obj.paginator.num_pages }}">dernière
+                            &raquo;</a>
+                    </li>
+                    {% endif %}
+                    <!-- </span> -->
+                </ul>
+            </nav>
+        </div>
+        {% endif %}
+
+
+
+
+
+        {% else %}
+
+        <div class="alert alert-danger" role="alert">
+            <h3 class="alert-heading">Aucun produit !!!</h3>
+            <p>Aucun produit n'a été trouvé pour <strong>{{ search }}</strong>.</p>
+            <p>Relancez la recherche.</p>
+            <hr>
+            <p class="mb-0">Vous pouvez faire la recherche par nom de produit, catégorie ou marque.</p>
+        </div>
+
+        {% endif %}
+    </div>
+</section>
+
+<!-- About-->
+{% include "pages/about.html" %}
+
+{% endblock %}

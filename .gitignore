@@ -1,0 +1,6 @@
+.env
+htmlcov/
+.coverage
+geckodriver.log
+staticfiles/
+production.py
