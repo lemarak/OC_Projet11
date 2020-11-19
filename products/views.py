@@ -73,7 +73,6 @@ class SearchListView(ListView):
     def get_queryset(self):
         """return products from search term."""
         query = self.request.GET['search']
-        capture_message("Query on %s" % query, level="error")
         products = Product.objects.search(query)
 
         return products
