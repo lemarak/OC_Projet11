@@ -1,11 +1,10 @@
-# Openclassrooms : DA Python : Projet 10
+# Openclassrooms : DA Python : Projet 11
+# Améliorez un projet existant en Python
 
 ## Contexte
 
 Projet réalisé dans le cadre de la formation OpenClassrooms, parcours Développement d'applications Python.
-La startup Pur Beurre, souhaite développer une plateforme web à destination de ses clients. Ce site permettra à quiconque de trouver un substitut sain à un aliment considéré comme "Trop gras, trop sucré, trop salé"
-Un cahier des charges précis est fourni par le client.
-Les données seront importés à partir de l'api OpenFoodFacts.
+
 
 ## Présentation
 
