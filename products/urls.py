@@ -6,7 +6,8 @@ from .views import (
     SubstitutesListView,
     SearchListView,
     FavoritesListView,
-    admin_favorite
+    admin_favorite,
+    CategoryListView
 )
 
 urlpatterns = [
@@ -18,4 +19,5 @@ urlpatterns = [
          name='favorites'),
     path('favorite/<str:pk>/<str:action>/', admin_favorite,
          name='admin_favorite'),
+    path('category/<str:pk>', CategoryListView.as_view(), name="category"),
 ]

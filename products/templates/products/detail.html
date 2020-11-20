@@ -13,7 +13,8 @@
                 alt="{{ product.product_name_fr }}">
         </div>
         <div class="row align-items-center justify-content-center text-center">
-            <h3 class="text-white">{{ product.product_name_fr }} ({{ product.categories.first }})</h3>
+            <h3 class="text-white">{{ product.product_name_fr }} (<a class="text-white"
+                    href="{% url 'category' product.categories.first.pk %}">{{ product.categories.first }}</a>)</h3>
         </div>
         <div class="row align-items-center justify-content-center text-center">
             <p class="text-white">{{ product.generic_name_fr }}</p>
@@ -22,11 +23,11 @@
         <div class="row justify-content-center">
             {% if user.is_authenticated %}
             {% if product in user.product_set.all %}
-            <a href="{% url 'admin_favorite' product.id_product 'del' %}"
-                class="btn btn-sm btn-outline-primary" id="del-fav">Retirer</a>
+            <a href="{% url 'admin_favorite' product.id_product 'del' %}" class="btn btn-sm btn-outline-primary"
+                id="del-fav">Retirer</a>
             {% else %}
-            <a href="{% url 'admin_favorite' product.id_product 'add' %}"
-                class="btn btn-sm btn-outline-primary" id="add-fav">Sauvegarder</a>
+            <a href="{% url 'admin_favorite' product.id_product 'add' %}" class="btn btn-sm btn-outline-primary"
+                id="add-fav">Sauvegarder</a>
             {% endif %}
             {% endif %}
         </div>

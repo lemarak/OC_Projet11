@@ -4,7 +4,7 @@ import logging
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic import DetailView, ListView
 
-from .models import Product
+from .models import Product, Category
 
 logger = logging.getLogger(__name__)
 
@@ -81,6 +81,36 @@ class SearchListView(ListView):
         """add search in global context."""
         context = super().get_context_data(**kwargs)
         context['search'] = self.request.GET['search']
+
+        return context
+
+
+# for v2
+class CategoryListView(ListView):
+    """Display list substitutes from a product.
+
+    **Context**
+        'substitutes', get by Product.objects.get_substitutes,
+        'selected_product', an instance of :model:`products.Product`.
+    **Template:**
+        'products/substitutes.html'
+    """
+    template_name = 'products/search.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        """return substitutes from a product."""
+        category = Category.objects.get(pk=self.kwargs['pk'])
+        print("Catégorie:", category)
+        products = category.product_set.all()
+        self.paginate_by = 6
+
+        return products
+
+    def get_context_data(self, **kwargs):
+        """add selected_product in global context."""
+        context = super().get_context_data(**kwargs)
+        context['category'] = Category.objects.get(pk=self.kwargs['pk'])
 
         return context
 

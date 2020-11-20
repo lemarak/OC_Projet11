@@ -44,7 +44,7 @@
                             <a href="{% url 'admin_favorite' favorite.id_product 'del' %}"
                                 class="btn btn-sm btn-outline-secondary">Retirer</a>
                             {% endif %}
-                            <small class="text-muted">{{ favorite.categories.first }}</small>
+                            <small class="text-muted"><a href="{% url 'category' favorite.categories.first.pk %}">{{ favorite.categories.first }}</a></small>
                         </div>
 
                     </div>

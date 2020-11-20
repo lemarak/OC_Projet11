@@ -45,6 +45,7 @@
                                 placeholder="Recherche">
                         </form>
                     </li>
+                    
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">A propos</a></li>
                     {% if user.is_authenticated %}
                     <li class="nav-item"><a class="nav-link" href="{% url 'profile' user.id %}">{{ user.username }}</a>

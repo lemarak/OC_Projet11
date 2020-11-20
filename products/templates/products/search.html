@@ -12,8 +12,13 @@
 
 
         <div class="row pb-2">
+            {% if search %}
             <h4 class="text-white">Votre recherche a renvoyé <strong>{{ page_obj.paginator.count }}</strong>
                 produit{{ page_obj.paginator.count|pluralize }} correspondant à <strong>{{ search }} </strong></h4>
+            {% else %}
+            <h4 class="text-white">{{ page_obj.paginator.count }} 
+                produit{{ page_obj.paginator.count|pluralize }} pour la catégorie <strong>{{ category }} </strong></h4>
+            {% endif %}
         </div>
         <div class="row">
             {% for product in products %}
@@ -35,7 +40,7 @@
                             <a href="{% url 'substitutes' product.slug %}" class="btn btn-sm btn-outline-secondary"
                                 id="link-{{ product.slug }}">Voir
                                 substituts</a>
-                            <small class="text-muted">{{ product.categories.first }}</small>
+                            <small class="text-muted"><a href="{% url 'category' product.categories.first.pk %}">{{ product.categories.first }}</a></small>
                         </div>
                     </div>
                 </div>
@@ -45,8 +50,6 @@
 
         <!-- Navigate-->
         {% include "pages/navigate.html" %}
-
-
 
 
         {% else %}
