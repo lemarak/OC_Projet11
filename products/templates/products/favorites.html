@@ -38,14 +38,15 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ favorite }}</h5>
                         <p class="card-text">{{ favorite.generic_name_fr }}</p>
-                        
+
                         <div class="d-flex justify-content-between align-items-center">
                             {% if user.is_authenticated %}
-                            <a href="{% url 'admin_favorite' favorite.id_product 'del' %}" class="btn btn-sm btn-outline-secondary">Retirer</a>
+                            <a href="{% url 'admin_favorite' favorite.id_product 'del' %}"
+                                class="btn btn-sm btn-outline-secondary">Retirer</a>
                             {% endif %}
-                             <small class="text-muted">{{ favorite.categories.first }}</small>
+                            <small class="text-muted">{{ favorite.categories.first }}</small>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -54,41 +55,8 @@
 
         </div>
 
-        {% if is_paginated %}
-        <div class="row justify-content-center ">
-
-            <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-center">
-                    <!-- <span class="step-links"> -->
-                    {% if page_obj.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link text-white bg-primary" href="?page=1">&laquo; première</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link text-white bg-primary"
-                            href="?page={{ page_obj.previous_page_number }}">précédent</a>
-                    </li>
-                    {% endif %}
-
-                    <li class="current page-item">
-                        <p class="text-white bg-primary p-2">
-                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                        </p>
-                    </li>
-
-                    {% if page_obj.has_next %}
-                    <li class="page-item"><a class="page-link text-white bg-primary"
-                            href="?page={{ page_obj.next_page_number }}">suivant</a></li>
-                    <li class="page-item"><a class="page-link text-white bg-primary"
-                            href="?page={{ page_obj.paginator.num_pages }}">dernière
-                            &raquo;</a>
-                    </li>
-                    {% endif %}
-                    <!-- </span> -->
-                </ul>
-            </nav>
-        </div>
-        {% endif %}
+        <!-- Navigate-->
+        {% include "pages/navigate.html" %}
 
         {% endif %}
     </div>
