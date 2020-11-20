@@ -34,3 +34,9 @@ class ProductsUrlTests(SimpleTestCase):
         """test the url for deleting a favorite product."""
         url = reverse('admin_favorite', args=[1234, "del"])
         self.assertEqual(url, '/products/favorite/1234/del/')
+
+    # for v2
+    def test_categories_url(self):
+        """test the url for the category page"""
+        url = reverse('category', args=["my_category"])
+        self.assertEqual(url, '/products/category/my_category')

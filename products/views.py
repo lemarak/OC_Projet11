@@ -87,13 +87,13 @@ class SearchListView(ListView):
 
 # for v2
 class CategoryListView(ListView):
-    """Display list substitutes from a product.
+    """Display list prodycts from a category.
 
     **Context**
-        'substitutes', get by Product.objects.get_substitutes,
-        'selected_product', an instance of :model:`products.Product`.
+        'products', get by Product.objects.get_substitutes,
+        'category', an instance of :model:'products.Category'.
     **Template:**
-        'products/substitutes.html'
+        'products/search.html'
     """
     template_name = 'products/search.html'
     context_object_name = 'products'

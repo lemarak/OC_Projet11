@@ -12,7 +12,7 @@ class ProductsViewTest(TestCase):
     def setUpTestData(cls):
         """Method called to prepare the test fixture."""
         cls.category = Category(
-            id_category="1à",
+            id_category="1a",
             name="category_test",
             products=1,
             visible=True
@@ -127,5 +127,25 @@ class ProductsViewTest(TestCase):
         html = response.content.decode('utf8')
         self.assertEqual(response.status_code, 200)
         self.assertInHTML("""
-          <h3 class="text-white">test_1 (category_test)</h3>
+          <h3 class="text-white">test_1 (<a class="text-white" href="/products/category/1a">category_test</a>)</h3>
         """, html)
+
+    #for v2
+    def test_category_pagination_is_six(self):
+        """check pagination by six for category."""
+        url = reverse('category', args=['1a'])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('is_paginated' in response.context)
+        self.assertTrue(response.context['is_paginated'])
+        self.assertTrue(len(response.context['products']) == 6)
+
+    # for v2
+    def test_lists_all_products_from_category(self):
+        """test if all products returned from a category, second page called."""
+        url = reverse('category', args=['1a'])
+        response = self.client.get(url+'?page=2')
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('is_paginated' in response.context)
+        self.assertTrue(response.context['is_paginated'])
+        self.assertTrue(len(response.context['products']) == 5)
