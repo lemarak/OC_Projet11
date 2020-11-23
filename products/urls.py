@@ -7,7 +7,8 @@ from .views import (
     SearchListView,
     FavoritesListView,
     admin_favorite,
-    CategoryListView
+    CategoryListView,
+    CategoriesListView
 )
 
 urlpatterns = [
@@ -20,4 +21,5 @@ urlpatterns = [
     path('favorite/<str:pk>/<str:action>/', admin_favorite,
          name='admin_favorite'),
     path('category/<str:pk>', CategoryListView.as_view(), name="category"),
+    path('categories/', CategoriesListView.as_view(), name="categories"),
 ]

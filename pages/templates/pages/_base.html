@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Pur Beurre</title>
+    <title>{% block title %}Pur Beurre{% endblock title %}</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}" />
     <!-- Font Awesome icons (free version)-->
@@ -45,7 +45,7 @@
                                 placeholder="Recherche">
                         </form>
                     </li>
-                    
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'categories'%}">Catégories</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">A propos</a></li>
                     {% if user.is_authenticated %}
                     <li class="nav-item"><a class="nav-link" href="{% url 'profile' user.id %}">{{ user.username }}</a>

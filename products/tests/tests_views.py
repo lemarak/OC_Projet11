@@ -130,7 +130,7 @@ class ProductsViewTest(TestCase):
           <h3 class="text-white">test_1 (<a class="text-white" href="/products/category/1a">category_test</a>)</h3>
         """, html)
 
-    #for v2
+    # for v2
     def test_category_pagination_is_six(self):
         """check pagination by six for category."""
         url = reverse('category', args=['1a'])
@@ -142,7 +142,8 @@ class ProductsViewTest(TestCase):
 
     # for v2
     def test_lists_all_products_from_category(self):
-        """test if all products returned from a category, second page called."""
+        """test if all products returned from a category,
+        second page called."""
         url = reverse('category', args=['1a'])
         response = self.client.get(url+'?page=2')
         self.assertEqual(response.status_code, 200)

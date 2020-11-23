@@ -87,7 +87,7 @@ class SearchListView(ListView):
 
 # for v2
 class CategoryListView(ListView):
-    """Display list prodycts from a category.
+    """Display list products from a category.
 
     **Context**
         'products', get by Product.objects.get_substitutes,
@@ -113,6 +113,20 @@ class CategoryListView(ListView):
         context['category'] = Category.objects.get(pk=self.kwargs['pk'])
 
         return context
+
+
+# for v2
+class CategoriesListView(ListView):
+    """Display list categories.
+        **Context**
+        'categories', get by Categories.all,
+    **Template:**
+        'products/categories.html'
+    """
+    model = Category
+    template_name = 'products/categories.html'
+    context_object_name = 'categories'
+    paginate_by = 6
 
 
 class FavoritesListView(ListView):

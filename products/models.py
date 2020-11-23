@@ -29,6 +29,9 @@ class Category(models.Model):
         """Custom representation of a category instance."""
         return str(self.name)
 
+    class Meta:
+        ordering = ['name']
+
 
 class ProductManager(models.Manager):
     """Methods associated with the Product model (find products and get
