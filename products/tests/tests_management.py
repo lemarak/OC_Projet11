@@ -1,6 +1,7 @@
 from unittest.mock import MagicMock, patch
 
 from django.test import TestCase
+from django.contrib.auth import get_user_model
 
 from products.management.commands import import_api
 from products.models import Product, Category
@@ -68,3 +69,19 @@ class ManageProductTest(TestCase):
         del product_ko['nutriscore_grade']
         self.command.add_product(product_ko, self.category_dict['id'])
         self.assertEqual(Product.objects.count(), 0)
+
+    # for v2
+    def test_keep_favorite(self):
+        """ Test if favorites are kept after updating products """
+        self.command.add_category(self.category_dict)
+        self.command.add_product(self.product_dict, self.category_dict['id'])
+        product = Product.objects.first()
+        User = get_user_model()
+        user = User.objects.create(
+            username='test',
+            email='test@example.com',
+            password='123test'
+        )
+        product.favorites.add(user)
+        Category.objects.all().delete()
+        self.assertEqual(True, user in product.favorites.all())

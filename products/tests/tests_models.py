@@ -80,3 +80,8 @@ class FavoriteModelTestCase(BaseModelTestCase):
         """Test adding a favorite for a user."""
         self.product.favorites.add(self.user)
         self.assertEqual(True, self.user in self.product.favorites.all())
+
+    def test_keep_favorite_when_delete_category(self):
+        """ test if favorites are keeping when category is deleted """
+        self.category.delete()
+        self.assertEqual(True, self.user in self.product.favorites.all())

@@ -4,3 +4,5 @@ htmlcov/
 geckodriver.log
 staticfiles/
 production.py
+__pycache__/
+production.py
