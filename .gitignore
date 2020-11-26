@@ -6,3 +6,4 @@ staticfiles/
 production.py
 __pycache__/
 production.py
+tests_chrome.py
